@@ -17,7 +17,7 @@
             set { gardenName = value; }
         }
 
-        public List<PlantModel> PlantsInGarden
+         public List<PlantModel> PlantsInGarden
         {
             get { return plantsInGarden; }
         }

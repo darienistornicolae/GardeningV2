@@ -7,12 +7,12 @@ using Newtonsoft.Json.Converters;
 
 namespace GardeningV2
 {
-    public partial class NewGarden : Form
+    public partial class Onboarding : Form
     {
         private CustomerModel customer;
         private GardenModel garden;
 
-        public NewGarden()
+        public Onboarding()
         {
             InitializeComponent();
             customer = new CustomerModel();
@@ -119,7 +119,6 @@ namespace GardeningV2
                 garden.DeletePlant(selectedPlant);
                 plantsListBox.Items.Remove(selectedPlant);
 
-                // Save updated garden to a JSON file
                 SaveDataToJSON();
             }
             else
@@ -155,9 +154,15 @@ namespace GardeningV2
             plantColorComboBox.SelectedItem = null;
         }
 
-        private void NewGarden_Load(object sender, EventArgs e)
-        {
 
+        private void goToDashboard_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+
+            Dashboard dashboardForm = new Dashboard();
+
+            dashboardForm.Show();
         }
+
     }
 }

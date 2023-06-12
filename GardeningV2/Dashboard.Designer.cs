@@ -54,7 +54,7 @@
             // 
             gardenNameLabel.AutoSize = true;
             gardenNameLabel.Font = new Font("Verdana", 24F, FontStyle.Regular, GraphicsUnit.Point);
-            gardenNameLabel.Location = new Point(423, 9);
+            gardenNameLabel.Location = new Point(357, 48);
             gardenNameLabel.Name = "gardenNameLabel";
             gardenNameLabel.Size = new Size(113, 38);
             gardenNameLabel.TabIndex = 0;
@@ -150,6 +150,7 @@
             showInfoButton.TabIndex = 8;
             showInfoButton.Text = "Info";
             showInfoButton.UseVisualStyleBackColor = true;
+            showInfoButton.Click += showInfoButton_Click;
             // 
             // removePlantButton
             // 
@@ -159,6 +160,7 @@
             removePlantButton.TabIndex = 7;
             removePlantButton.Text = "Remove";
             removePlantButton.UseVisualStyleBackColor = true;
+            removePlantButton.Click += removePlantButton_Click;
             // 
             // addPlantButton
             // 
@@ -168,6 +170,7 @@
             addPlantButton.TabIndex = 6;
             addPlantButton.Text = "Add";
             addPlantButton.UseVisualStyleBackColor = true;
+            addPlantButton.Click += addPlantButton_Click;
             // 
             // label6
             // 
@@ -236,6 +239,7 @@
             newGardenButton.TabIndex = 3;
             newGardenButton.Text = "NewGarden";
             newGardenButton.UseVisualStyleBackColor = true;
+            newGardenButton.Click += newGardenButton_Click;
             // 
             // removeGardenButton
             // 

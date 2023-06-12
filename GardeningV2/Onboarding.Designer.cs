@@ -1,6 +1,6 @@
 ﻿namespace GardeningV2
 {
-    partial class NewGarden
+    partial class Onboarding
     {
         /// <summary>
         ///  Required designer variable.
@@ -54,6 +54,7 @@
             prunePeriod = new Label();
             plantType = new Label();
             label1 = new Label();
+            goToDashboard = new Button();
             tabControl1.SuspendLayout();
             gardenTab.SuspendLayout();
             plantTab.SuspendLayout();
@@ -72,6 +73,7 @@
             // 
             // gardenTab
             // 
+            gardenTab.Controls.Add(goToDashboard);
             gardenTab.Controls.Add(createGardenButton);
             gardenTab.Controls.Add(gardenNameTextBox);
             gardenTab.Controls.Add(customerNameTextBox);
@@ -90,7 +92,7 @@
             // createGardenButton
             // 
             createGardenButton.Font = new Font("Verdana", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            createGardenButton.Location = new Point(315, 263);
+            createGardenButton.Location = new Point(76, 267);
             createGardenButton.Name = "createGardenButton";
             createGardenButton.Size = new Size(264, 76);
             createGardenButton.TabIndex = 5;
@@ -318,6 +320,17 @@
             label1.TabIndex = 1;
             label1.Text = "Welcome!";
             // 
+            // goToDashboard
+            // 
+            goToDashboard.Font = new Font("Verdana", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            goToDashboard.Location = new Point(452, 267);
+            goToDashboard.Name = "goToDashboard";
+            goToDashboard.Size = new Size(264, 76);
+            goToDashboard.TabIndex = 6;
+            goToDashboard.Text = "Dashboard";
+            goToDashboard.UseVisualStyleBackColor = true;
+            goToDashboard.Click += goToDashboard_Click;
+            // 
             // NewGarden
             // 
             AutoScaleDimensions = new SizeF(8F, 14F);
@@ -365,5 +378,6 @@
         private DateTimePicker pruneStartPeriodTimePicker;
         private DateTimePicker blossomStartTimePicker;
         private DateTimePicker pruneEndTimePicker;
+        private Button goToDashboard;
     }
 }
