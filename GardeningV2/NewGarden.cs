@@ -41,13 +41,14 @@ namespace GardeningV2
             }
 
             garden = new GardenModel(gardenNameTextBox.Text);
-            customer.AddGarden(garden.GardenName);
+            customer.AddGarden(garden);
 
             // Save customer and garden to a JSON file
             SaveDataToJSON();
 
             MessageBox.Show("Garden created successfully!");
         }
+
 
         private void addPlantButton_Click(object sender, EventArgs e)
         {
@@ -109,26 +110,6 @@ namespace GardeningV2
             {
                 MessageBox.Show("Please select a plant from the list.");
             }
-        }
-
-        private void prunePeriodCalendarButton_Click(object sender, EventArgs e)
-        {
-            DateTime selectedDate = GetSelectedDate();
-            prunePeriod.Text = selectedDate.ToShortDateString();
-        }
-
-        private void blossomPeriodCalendarButton_Click(object sender, EventArgs e)
-        {
-            DateTime selectedDate = GetSelectedDate();
-            blossomPeriod.Text = selectedDate.ToShortDateString();
-        }
-
-        private DateTime GetSelectedDate()
-        {
-            // Simulated calendar selection logic
-            DateTime selectedDate = DateTime.Now; // Replace this with your own calendar control logic
-
-            return selectedDate;
         }
 
         private void SaveDataToJSON()

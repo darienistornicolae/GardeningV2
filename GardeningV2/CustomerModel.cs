@@ -6,21 +6,19 @@ namespace Gardening
 {
     public class CustomerModel
     {
-        private string name;
+        public string Name { get; set; }
+
         private List<GardenModel> gardens;
 
         public CustomerModel(string name)
         {
-            this.name = name;
+            Name = name;
             gardens = new List<GardenModel>();
         }
 
-        public CustomerModel() { }
-
-        public string Name
+        public CustomerModel()
         {
-            get { return name; }
-            private set { name = value; }
+            gardens = new List<GardenModel>();
         }
 
         public List<GardenModel> Gardens
@@ -28,9 +26,8 @@ namespace Gardening
             get { return gardens; }
         }
 
-        public void AddGarden(string gardenName)
+        public void AddGarden(GardenModel garden)
         {
-            GardenModel garden = new GardenModel(gardenName);
             gardens.Add(garden);
         }
 
@@ -39,4 +36,6 @@ namespace Gardening
             gardens.Remove(garden);
         }
     }
+
+
 }

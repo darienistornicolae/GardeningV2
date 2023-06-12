@@ -37,8 +37,7 @@
             gardenName = new Label();
             userName = new Label();
             plantTab = new TabPage();
-            blossomPeriodCalendarButton = new Button();
-            prunePeriodCalendarButton = new Button();
+            blossomPeriodTimePicker = new DateTimePicker();
             plantColorComboBox = new ComboBox();
             plantTypeTextBox = new TextBox();
             plantNameTextBox = new TextBox();
@@ -52,6 +51,7 @@
             prunePeriod = new Label();
             plantType = new Label();
             label1 = new Label();
+            prunPeriodTimePicker = new DateTimePicker();
             tabControl1.SuspendLayout();
             gardenTab.SuspendLayout();
             plantTab.SuspendLayout();
@@ -140,8 +140,8 @@
             // 
             // plantTab
             // 
-            plantTab.Controls.Add(blossomPeriodCalendarButton);
-            plantTab.Controls.Add(prunePeriodCalendarButton);
+            plantTab.Controls.Add(prunPeriodTimePicker);
+            plantTab.Controls.Add(blossomPeriodTimePicker);
             plantTab.Controls.Add(plantColorComboBox);
             plantTab.Controls.Add(plantTypeTextBox);
             plantTab.Controls.Add(plantNameTextBox);
@@ -163,25 +163,12 @@
             plantTab.Text = "Plant";
             plantTab.UseVisualStyleBackColor = true;
             // 
-            // blossomPeriodCalendarButton
+            // blossomPeriodTimePicker
             // 
-            blossomPeriodCalendarButton.Location = new Point(284, 285);
-            blossomPeriodCalendarButton.Name = "blossomPeriodCalendarButton";
-            blossomPeriodCalendarButton.Size = new Size(88, 32);
-            blossomPeriodCalendarButton.TabIndex = 15;
-            blossomPeriodCalendarButton.Text = "Calendar";
-            blossomPeriodCalendarButton.UseVisualStyleBackColor = true;
-            blossomPeriodCalendarButton.Click += blossomPeriodCalendarButton_Click;
-            // 
-            // prunePeriodCalendarButton
-            // 
-            prunePeriodCalendarButton.Location = new Point(238, 222);
-            prunePeriodCalendarButton.Name = "prunePeriodCalendarButton";
-            prunePeriodCalendarButton.Size = new Size(88, 32);
-            prunePeriodCalendarButton.TabIndex = 14;
-            prunePeriodCalendarButton.Text = "Calendar";
-            prunePeriodCalendarButton.UseVisualStyleBackColor = true;
-            prunePeriodCalendarButton.Click += prunePeriodCalendarButton_Click;
+            blossomPeriodTimePicker.Location = new Point(272, 290);
+            blossomPeriodTimePicker.Name = "blossomPeriodTimePicker";
+            blossomPeriodTimePicker.Size = new Size(296, 27);
+            blossomPeriodTimePicker.TabIndex = 17;
             // 
             // plantColorComboBox
             // 
@@ -306,6 +293,13 @@
             label1.TabIndex = 1;
             label1.Text = "Welcome!";
             // 
+            // prunPeriodTimePicker
+            // 
+            prunPeriodTimePicker.Location = new Point(229, 227);
+            prunPeriodTimePicker.Name = "prunPeriodTimePicker";
+            prunPeriodTimePicker.Size = new Size(296, 27);
+            prunPeriodTimePicker.TabIndex = 18;
+            // 
             // NewGarden
             // 
             AutoScaleDimensions = new SizeF(8F, 14F);
@@ -348,8 +342,8 @@
         private Button removePlantButton;
         private Button addPlantButton;
         private ListBox plantsListBox;
-        private Button blossomPeriodCalendarButton;
-        private Button prunePeriodCalendarButton;
         private Button createGardenButton;
+        private DateTimePicker blossomPeriodTimePicker;
+        private DateTimePicker prunPeriodTimePicker;
     }
 }
