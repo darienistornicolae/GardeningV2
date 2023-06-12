@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using Gardening;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace GardeningV2
 {
@@ -64,14 +65,27 @@ namespace GardeningV2
                 return;
             }
 
-            if (!DateTime.TryParse(prunePeriod.Text, out DateTime pruneStart) || !DateTime.TryParse(blossomPeriod.Text, out DateTime blossomStart))
+            DateTime pruneStart = pruneStartPeriodTimePicker.Value;
+            DateTime pruneEnd = pruneEndTimePicker.Value;
+            DateTime blossomStart = blossomStartTimePicker.Value;
+            DateTime blossomEnd = blossomEndTimerPeriod.Value;
+
+            if (pruneStart > pruneEnd || blossomStart > blossomEnd)
             {
-                MessageBox.Show("Please select valid prune and blossom periods.");
+                MessageBox.Show("Please select valid periods.");
                 return;
             }
 
             Gardening.Color color = (Gardening.Color)plantColorComboBox.SelectedItem;
-            PlantModel plant = new PlantModel(plantNameTextBox.Text.ToString(), color, plantTypeTextBox.Text, pruneStart, pruneStart.AddDays(7), blossomStart, blossomStart.AddDays(7));
+            PlantModel plant = new PlantModel(
+                plantNameTextBox.Text.ToString(),
+                color,
+                plantTypeTextBox.Text,
+                pruneStart,
+                pruneEnd,
+                blossomStart,
+                blossomEnd
+            );
 
             garden.AddPlant(plant);
             plantsListBox.Items.Add(plant);
@@ -81,6 +95,8 @@ namespace GardeningV2
 
             ClearPlantFields();
         }
+
+
 
         private void getInfoButton_Click(object sender, EventArgs e)
         {
@@ -119,6 +135,9 @@ namespace GardeningV2
                 Formatting = Formatting.Indented
             };
 
+            // Add StringEnumConverter to serialize the Color enum as strings
+            settings.Converters.Add(new StringEnumConverter());
+
             string customerJson = JsonConvert.SerializeObject(customer, settings);
             File.WriteAllText("customer.json", customerJson);
 
@@ -134,8 +153,11 @@ namespace GardeningV2
             plantNameTextBox.Text = string.Empty;
             plantTypeTextBox.Text = string.Empty;
             plantColorComboBox.SelectedItem = null;
-            prunePeriod.Text = string.Empty;
-            blossomPeriod.Text = string.Empty;
+        }
+
+        private void NewGarden_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -37,7 +37,10 @@
             gardenName = new Label();
             userName = new Label();
             plantTab = new TabPage();
-            blossomPeriodTimePicker = new DateTimePicker();
+            blossomStartTimePicker = new DateTimePicker();
+            pruneEndTimePicker = new DateTimePicker();
+            pruneStartPeriodTimePicker = new DateTimePicker();
+            blossomEndTimerPeriod = new DateTimePicker();
             plantColorComboBox = new ComboBox();
             plantTypeTextBox = new TextBox();
             plantNameTextBox = new TextBox();
@@ -51,7 +54,6 @@
             prunePeriod = new Label();
             plantType = new Label();
             label1 = new Label();
-            prunPeriodTimePicker = new DateTimePicker();
             tabControl1.SuspendLayout();
             gardenTab.SuspendLayout();
             plantTab.SuspendLayout();
@@ -140,8 +142,10 @@
             // 
             // plantTab
             // 
-            plantTab.Controls.Add(prunPeriodTimePicker);
-            plantTab.Controls.Add(blossomPeriodTimePicker);
+            plantTab.Controls.Add(blossomStartTimePicker);
+            plantTab.Controls.Add(pruneEndTimePicker);
+            plantTab.Controls.Add(pruneStartPeriodTimePicker);
+            plantTab.Controls.Add(blossomEndTimerPeriod);
             plantTab.Controls.Add(plantColorComboBox);
             plantTab.Controls.Add(plantTypeTextBox);
             plantTab.Controls.Add(plantNameTextBox);
@@ -163,12 +167,33 @@
             plantTab.Text = "Plant";
             plantTab.UseVisualStyleBackColor = true;
             // 
-            // blossomPeriodTimePicker
+            // blossomStartTimePicker
             // 
-            blossomPeriodTimePicker.Location = new Point(272, 290);
-            blossomPeriodTimePicker.Name = "blossomPeriodTimePicker";
-            blossomPeriodTimePicker.Size = new Size(296, 27);
-            blossomPeriodTimePicker.TabIndex = 17;
+            blossomStartTimePicker.Location = new Point(272, 296);
+            blossomStartTimePicker.Name = "blossomStartTimePicker";
+            blossomStartTimePicker.Size = new Size(296, 27);
+            blossomStartTimePicker.TabIndex = 20;
+            // 
+            // pruneEndTimePicker
+            // 
+            pruneEndTimePicker.Location = new Point(226, 260);
+            pruneEndTimePicker.Name = "pruneEndTimePicker";
+            pruneEndTimePicker.Size = new Size(299, 27);
+            pruneEndTimePicker.TabIndex = 19;
+            // 
+            // pruneStartPeriodTimePicker
+            // 
+            pruneStartPeriodTimePicker.Location = new Point(226, 227);
+            pruneStartPeriodTimePicker.Name = "pruneStartPeriodTimePicker";
+            pruneStartPeriodTimePicker.Size = new Size(299, 27);
+            pruneStartPeriodTimePicker.TabIndex = 18;
+            // 
+            // blossomEndTimerPeriod
+            // 
+            blossomEndTimerPeriod.Location = new Point(272, 329);
+            blossomEndTimerPeriod.Name = "blossomEndTimerPeriod";
+            blossomEndTimerPeriod.Size = new Size(296, 27);
+            blossomEndTimerPeriod.TabIndex = 17;
             // 
             // plantColorComboBox
             // 
@@ -247,7 +272,7 @@
             // 
             blossomPeriod.AutoSize = true;
             blossomPeriod.Font = new Font("Verdana", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
-            blossomPeriod.Location = new Point(35, 285);
+            blossomPeriod.Location = new Point(35, 324);
             blossomPeriod.Name = "blossomPeriod";
             blossomPeriod.Size = new Size(231, 32);
             blossomPeriod.TabIndex = 4;
@@ -293,13 +318,6 @@
             label1.TabIndex = 1;
             label1.Text = "Welcome!";
             // 
-            // prunPeriodTimePicker
-            // 
-            prunPeriodTimePicker.Location = new Point(229, 227);
-            prunPeriodTimePicker.Name = "prunPeriodTimePicker";
-            prunPeriodTimePicker.Size = new Size(296, 27);
-            prunPeriodTimePicker.TabIndex = 18;
-            // 
             // NewGarden
             // 
             AutoScaleDimensions = new SizeF(8F, 14F);
@@ -343,7 +361,9 @@
         private Button addPlantButton;
         private ListBox plantsListBox;
         private Button createGardenButton;
-        private DateTimePicker blossomPeriodTimePicker;
-        private DateTimePicker prunPeriodTimePicker;
+        private DateTimePicker blossomEndTimerPeriod;
+        private DateTimePicker pruneStartPeriodTimePicker;
+        private DateTimePicker blossomStartTimePicker;
+        private DateTimePicker pruneEndTimePicker;
     }
 }
