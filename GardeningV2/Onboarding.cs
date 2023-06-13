@@ -163,6 +163,5 @@ namespace GardeningV2
 
             dashboardForm.Show();
         }
-
     }
 }

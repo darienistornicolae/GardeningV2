@@ -30,6 +30,7 @@
         {
             tabControl1 = new TabControl();
             gardenTab = new TabPage();
+            goToDashboard = new Button();
             createGardenButton = new Button();
             gardenNameTextBox = new TextBox();
             customerNameTextBox = new TextBox();
@@ -54,7 +55,6 @@
             prunePeriod = new Label();
             plantType = new Label();
             label1 = new Label();
-            goToDashboard = new Button();
             tabControl1.SuspendLayout();
             gardenTab.SuspendLayout();
             plantTab.SuspendLayout();
@@ -88,6 +88,17 @@
             gardenTab.TabIndex = 0;
             gardenTab.Text = "Garden";
             gardenTab.UseVisualStyleBackColor = true;
+            // 
+            // goToDashboard
+            // 
+            goToDashboard.Font = new Font("Verdana", 18F, FontStyle.Regular, GraphicsUnit.Point);
+            goToDashboard.Location = new Point(452, 267);
+            goToDashboard.Name = "goToDashboard";
+            goToDashboard.Size = new Size(264, 76);
+            goToDashboard.TabIndex = 6;
+            goToDashboard.Text = "Dashboard";
+            goToDashboard.UseVisualStyleBackColor = true;
+            goToDashboard.Click += goToDashboard_Click;
             // 
             // createGardenButton
             // 
@@ -320,18 +331,7 @@
             label1.TabIndex = 1;
             label1.Text = "Welcome!";
             // 
-            // goToDashboard
-            // 
-            goToDashboard.Font = new Font("Verdana", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            goToDashboard.Location = new Point(452, 267);
-            goToDashboard.Name = "goToDashboard";
-            goToDashboard.Size = new Size(264, 76);
-            goToDashboard.TabIndex = 6;
-            goToDashboard.Text = "Dashboard";
-            goToDashboard.UseVisualStyleBackColor = true;
-            goToDashboard.Click += goToDashboard_Click;
-            // 
-            // NewGarden
+            // Onboarding
             // 
             AutoScaleDimensions = new SizeF(8F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -339,7 +339,7 @@
             Controls.Add(label1);
             Controls.Add(tabControl1);
             Font = new Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            Name = "NewGarden";
+            Name = "Onboarding";
             Text = "New Garden";
             tabControl1.ResumeLayout(false);
             gardenTab.ResumeLayout(false);
