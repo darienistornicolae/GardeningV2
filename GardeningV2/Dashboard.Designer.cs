@@ -67,6 +67,7 @@
             existingGardensComboBox.Name = "existingGardensComboBox";
             existingGardensComboBox.Size = new Size(121, 26);
             existingGardensComboBox.TabIndex = 1;
+            existingGardensComboBox.SelectedIndexChanged += existingGardenComboBox_SelectedIndexChanged;
             // 
             // groupBox1
             // 
@@ -249,6 +250,7 @@
             removeGardenButton.TabIndex = 4;
             removeGardenButton.Text = "Remove";
             removeGardenButton.UseVisualStyleBackColor = true;
+            removeGardenButton.Click += removeGardenButton_Click;
             // 
             // Dashboard
             // 

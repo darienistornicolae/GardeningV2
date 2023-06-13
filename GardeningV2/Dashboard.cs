@@ -16,6 +16,7 @@ namespace GardeningV2
     {
         private CustomerModel customer;
         private GardenModel garden;
+        private GardenModel selectedGarden;
 
         public Dashboard()
         {
@@ -53,8 +54,66 @@ namespace GardeningV2
                     PlantModel selectedPlant = garden.PlantsInGarden[plantsListTextBox.SelectedIndex];
                     UpdatePlantDetails(selectedPlant);
                 }
+                else
+                {
+                    // No plants in the garden, clear the plant details
+                    ClearPlantDetails();
+                }
+            }
+            else
+            {
+                // No garden exists, clear the plant details
+                ClearPlantDetails();
+            }
+
+            // Populate the existingGardenComboBox with garden names
+            foreach (GardenModel garden in customer.Gardens)
+            {
+                existingGardensComboBox.Items.Add(garden.GardenName);
+            }
+
+            // Set the initial selected garden
+            if (existingGardensComboBox.Items.Count > 0)
+            {
+                existingGardensComboBox.SelectedIndex = 0;
+                selectedGarden = customer.Gardens[existingGardensComboBox.SelectedIndex];
             }
         }
+
+        private void existingGardenComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Update the selected garden
+            selectedGarden = customer.Gardens[existingGardensComboBox.SelectedIndex];
+
+            // Update the dashboard with the selected garden's data
+            gardenNameLabel.Text = selectedGarden.GardenName;
+
+            // Clear existing items in the ListBox
+            plantsListTextBox.Items.Clear();
+
+            // Populate ListBox with plant names from the selected garden
+            foreach (PlantModel plant in selectedGarden.PlantsInGarden)
+            {
+                plantsListTextBox.Items.Add(plant.Plant);
+            }
+
+            // Display details of the first plant (assuming at least one plant exists in the garden)
+            if (selectedGarden.PlantsInGarden.Count > 0)
+            {
+                // Select the first plant by default
+                plantsListTextBox.SelectedIndex = 0;
+
+                PlantModel selectedPlant = selectedGarden.PlantsInGarden[plantsListTextBox.SelectedIndex];
+                UpdatePlantDetails(selectedPlant);
+            }
+            else
+            {
+                // No plants in the garden, clear the plant details
+                ClearPlantDetails();
+            }
+        }
+
+
         private void UpdatePlantDetails(PlantModel plant)
         {
             plantNameLabel.Text = plant.Plant;
@@ -132,7 +191,71 @@ namespace GardeningV2
 
         private void newGardenButton_Click(object sender, EventArgs e)
         {
+            AddGarden addGardenForm = new AddGarden(customer);
+            addGardenForm.ShowDialog();
 
+            // Update the Dashboard form after returning from the AddGarden form
+            RefreshDashboard();
         }
+
+        private void RefreshDashboard()
+        {
+            // Deserialize customer data from JSON
+            string customerJson = File.ReadAllText("customer.json");
+            customer = JsonConvert.DeserializeObject<CustomerModel>(customerJson);
+
+            // Get the first garden from the customer (assuming only one garden is supported in this example)
+            garden = customer?.Gardens.FirstOrDefault();
+
+            if (garden != null)
+            {
+                gardenNameLabel.Text = garden.GardenName;
+
+                // Clear existing items in the ListBox
+                plantsListTextBox.Items.Clear();
+
+                // Populate ListBox with plant names
+                foreach (PlantModel plant in garden.PlantsInGarden)
+                {
+                    plantsListTextBox.Items.Add(plant.Plant);
+                }
+
+                // Display details of the first plant (assuming at least one plant exists in the garden)
+                if (garden.PlantsInGarden.Count > 0)
+                {
+                    // Select the first plant by default
+                    plantsListTextBox.SelectedIndex = 0;
+
+                    PlantModel selectedPlant = garden.PlantsInGarden[plantsListTextBox.SelectedIndex];
+                    UpdatePlantDetails(selectedPlant);
+                }
+                else
+                {
+                    // No plants in the garden, clear the plant details
+                    ClearPlantDetails();
+                }
+            }
+            else
+            {
+                // No garden exists, clear the plant details
+                ClearPlantDetails();
+            }
+        }
+
+        private void removeGardenButton_Click(object sender, EventArgs e)
+        {
+            if (selectedGarden != null)
+            {
+                // Remove the selected garden from the customer's gardens
+                customer.Gardens.Remove(selectedGarden);
+
+                // Clear the selected garden and reset the form
+                selectedGarden = null;
+                ClearPlantDetails();
+                existingGardensComboBox.Items.Remove(existingGardensComboBox.SelectedItem);
+                existingGardensComboBox.SelectedIndex = -1;
+            }
+        }
+
     }
 }
