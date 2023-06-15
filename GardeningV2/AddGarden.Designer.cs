@@ -125,10 +125,10 @@
             plantTab.Controls.Add(plantColor);
             plantTab.Controls.Add(prunePeriod);
             plantTab.Controls.Add(plantType);
-            plantTab.Location = new Point(4, 24);
+            plantTab.Location = new Point(4, 25);
             plantTab.Name = "plantTab";
             plantTab.Padding = new Padding(3);
-            plantTab.Size = new Size(883, 360);
+            plantTab.Size = new Size(883, 359);
             plantTab.TabIndex = 1;
             plantTab.Text = "Plant";
             plantTab.UseVisualStyleBackColor = true;
@@ -193,6 +193,7 @@
             getInfoButton.TabIndex = 29;
             getInfoButton.Text = "Info";
             getInfoButton.UseVisualStyleBackColor = true;
+            getInfoButton.Click += getInfoButton_Click;
             // 
             // removePlantButton
             // 
@@ -202,6 +203,7 @@
             removePlantButton.TabIndex = 28;
             removePlantButton.Text = "Remove";
             removePlantButton.UseVisualStyleBackColor = true;
+            removePlantButton.Click += removePlantButton_Click;
             // 
             // addPlantButton
             // 

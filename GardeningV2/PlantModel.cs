@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace Gardening
@@ -17,6 +18,7 @@ namespace Gardening
     }
 
     public class PlantModel
+
     {
         private string plant;
         private Color color;
@@ -25,6 +27,7 @@ namespace Gardening
         private DateTime endBlossomPeriod;
         private DateTime startPrunePeriods;
         private DateTime endPrunePeriods;
+
 
         public PlantModel(string plant, Color color, string type, DateTime startBlossomPeriod, DateTime endBlosomPeriod, DateTime startPrunePeriods, DateTime endPrunePeriods)
         {

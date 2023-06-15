@@ -1,4 +1,5 @@
 ﻿using Gardening;
+using GardeningV2.GardeningV2;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,6 @@ namespace GardeningV2
     {
         private CustomerModel customer;
         private GardenModel newGarden;
-
         public AddGarden(CustomerModel customer)
         {
             InitializeComponent();
@@ -27,7 +27,6 @@ namespace GardeningV2
 
         private void AddGarden_Load(object sender, EventArgs e)
         {
-            // Deserialize customer data from JSON
             string customerJson = File.ReadAllText("customer.json");
             customer = JsonConvert.DeserializeObject<CustomerModel>(customerJson);
         }
@@ -40,15 +39,16 @@ namespace GardeningV2
                 return;
             }
 
-            // Create a new garden with the entered name
             newGarden = new GardenModel(addNewGardenTextBox.Text);
             customer.AddGarden(newGarden);
 
-            // Save updated customer to the JSON file
-            SaveDataToJSON();
+            AddGardenManager gardenManager = new AddGardenManager();
+
+            gardenManager.SaveDataToJSON(customer);
 
             MessageBox.Show("Garden added successfully!");
         }
+
 
         private void addPlantButton_Click(object sender, EventArgs e)
         {
@@ -89,22 +89,11 @@ namespace GardeningV2
             newGarden.AddPlant(plant);
             plantsListBox.Items.Add(plant);
 
-            // Save updated garden to the JSON file
-            SaveDataToJSON();
 
+            AddGardenManager gardenManager = new AddGardenManager();
+
+            gardenManager.SaveDataToJSON(customer);
             ClearPlantFields();
-        }
-
-        private void SaveDataToJSON()
-        {
-            JsonSerializerSettings settings = new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented
-            };
-
-            // Serialize the customer data back to JSON
-            string updatedCustomerJson = JsonConvert.SerializeObject(customer, settings);
-            File.WriteAllText("customer.json", updatedCustomerJson);
         }
 
         private void ClearPlantFields()
@@ -120,14 +109,43 @@ namespace GardeningV2
 
         private void goToDashboardButton_Click(object sender, EventArgs e)
         {
-            // Close the AddGarden form
             this.Close();
 
-            // Create an instance of the Dashboard form
             Dashboard dashboardForm = new Dashboard();
 
-            // Show the Dashboard form
             dashboardForm.Show();
+        }
+
+        private void getInfoButton_Click(object sender, EventArgs e)
+        {
+            if (plantsListBox.SelectedItem != null)
+            {
+                PlantModel selectedPlant = (PlantModel)plantsListBox.SelectedItem;
+                MessageBox.Show($"Plant: {selectedPlant.Plant}\nColor: {selectedPlant.Color}\nType: {selectedPlant.Type}\nBlossom Period: {selectedPlant.StartBlossomPeriod.ToShortDateString()} - {selectedPlant.EndBlosomPeriod.ToShortDateString()}\nPrune Period: {selectedPlant.StartPrunePeriods.ToShortDateString()} - {selectedPlant.EndPrunePeriods.ToShortDateString()}");
+            }
+            else
+            {
+                MessageBox.Show("Please select a plant from the list.");
+            }
+        }
+
+
+        private void removePlantButton_Click(object sender, EventArgs e)
+        {
+            if (plantsListBox.SelectedItem != null)
+            {
+                PlantModel selectedPlant = (PlantModel)plantsListBox.SelectedItem;
+                newGarden.DeletePlant(selectedPlant);
+                plantsListBox.Items.Remove(selectedPlant);
+
+
+                AddGardenManager gardenManager = new AddGardenManager();
+                gardenManager.SaveDataToJSON(customer);
+            }
+            else
+            {
+                MessageBox.Show("Please select a plant from the list.");
+            }
         }
 
     }

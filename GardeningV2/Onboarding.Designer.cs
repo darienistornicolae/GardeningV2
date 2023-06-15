@@ -73,7 +73,6 @@
             // 
             // gardenTab
             // 
-            gardenTab.Controls.Add(goToDashboard);
             gardenTab.Controls.Add(createGardenButton);
             gardenTab.Controls.Add(gardenNameTextBox);
             gardenTab.Controls.Add(customerNameTextBox);
@@ -92,9 +91,9 @@
             // goToDashboard
             // 
             goToDashboard.Font = new Font("Verdana", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            goToDashboard.Location = new Point(452, 267);
+            goToDashboard.Location = new Point(654, 12);
             goToDashboard.Name = "goToDashboard";
-            goToDashboard.Size = new Size(264, 76);
+            goToDashboard.Size = new Size(220, 48);
             goToDashboard.TabIndex = 6;
             goToDashboard.Text = "Dashboard";
             goToDashboard.UseVisualStyleBackColor = true;
@@ -103,7 +102,7 @@
             // createGardenButton
             // 
             createGardenButton.Font = new Font("Verdana", 18F, FontStyle.Regular, GraphicsUnit.Point);
-            createGardenButton.Location = new Point(76, 267);
+            createGardenButton.Location = new Point(327, 289);
             createGardenButton.Name = "createGardenButton";
             createGardenButton.Size = new Size(264, 76);
             createGardenButton.TabIndex = 5;
@@ -336,6 +335,7 @@
             AutoScaleDimensions = new SizeF(8F, 14F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(914, 484);
+            Controls.Add(goToDashboard);
             Controls.Add(label1);
             Controls.Add(tabControl1);
             Font = new Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point);

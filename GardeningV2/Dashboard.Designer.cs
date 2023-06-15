@@ -31,6 +31,8 @@
             gardenNameLabel = new Label();
             existingGardensComboBox = new ComboBox();
             groupBox1 = new GroupBox();
+            blossomPeakLabel = new Label();
+            label1 = new Label();
             BlossomPeriodLabel = new Label();
             prunePeriodLabel = new Label();
             plantColorLabel = new Label();
@@ -47,6 +49,8 @@
             plantsListTextBox = new ListBox();
             newGardenButton = new Button();
             removeGardenButton = new Button();
+            prunePeakLabel = new Label();
+            label8 = new Label();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -71,6 +75,10 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(prunePeakLabel);
+            groupBox1.Controls.Add(label8);
+            groupBox1.Controls.Add(blossomPeakLabel);
+            groupBox1.Controls.Add(label1);
             groupBox1.Controls.Add(BlossomPeriodLabel);
             groupBox1.Controls.Add(prunePeriodLabel);
             groupBox1.Controls.Add(plantColorLabel);
@@ -92,6 +100,25 @@
             groupBox1.TabIndex = 2;
             groupBox1.TabStop = false;
             groupBox1.Text = "MyGarden";
+            // 
+            // blossomPeakLabel
+            // 
+            blossomPeakLabel.AutoSize = true;
+            blossomPeakLabel.Location = new Point(511, 62);
+            blossomPeakLabel.Name = "blossomPeakLabel";
+            blossomPeakLabel.Size = new Size(58, 18);
+            blossomPeakLabel.TabIndex = 15;
+            blossomPeakLabel.Text = "label7";
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Verdana", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(328, 54);
+            label1.Name = "label1";
+            label1.Size = new Size(167, 25);
+            label1.TabIndex = 14;
+            label1.Text = "Blossom Peak:";
             // 
             // BlossomPeriodLabel
             // 
@@ -252,6 +279,25 @@
             removeGardenButton.UseVisualStyleBackColor = true;
             removeGardenButton.Click += removeGardenButton_Click;
             // 
+            // prunePeakLabel
+            // 
+            prunePeakLabel.AutoSize = true;
+            prunePeakLabel.Location = new Point(511, 104);
+            prunePeakLabel.Name = "prunePeakLabel";
+            prunePeakLabel.Size = new Size(58, 18);
+            prunePeakLabel.TabIndex = 17;
+            prunePeakLabel.Text = "label7";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Verdana", 15.75F, FontStyle.Regular, GraphicsUnit.Point);
+            label8.Location = new Point(328, 96);
+            label8.Name = "label8";
+            label8.Size = new Size(140, 25);
+            label8.TabIndex = 16;
+            label8.Text = "Prune Peak:";
+            // 
             // Dashboard
             // 
             AutoScaleDimensions = new SizeF(9F, 18F);
@@ -294,5 +340,9 @@
         private Label BlossomPeriodLabel;
         private Label prunePeriodLabel;
         private Label plantColorLabel;
+        private Label label1;
+        private Label blossomPeakLabel;
+        private Label prunePeakLabel;
+        private Label label8;
     }
 }

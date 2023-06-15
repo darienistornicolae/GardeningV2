@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Gardening;
+using GardeningV2;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -9,101 +10,54 @@ namespace GardeningV2
 {
     public partial class Onboarding : Form
     {
-        private CustomerModel customer;
-        private GardenModel garden;
+        private OnboardingManager onboardingManager;
 
         public Onboarding()
         {
             InitializeComponent();
-            customer = new CustomerModel();
-            garden = null;
+            onboardingManager = new OnboardingManager();
 
-            // Populate the plantColorComboBox with colors from the Color enum
             plantColorComboBox.DataSource = Enum.GetValues(typeof(Gardening.Color));
         }
 
         private void createGardenButton_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(customerNameTextBox.Text) || string.IsNullOrEmpty(gardenNameTextBox.Text))
-            {
-                MessageBox.Show("Please enter a valid customer name and garden name.");
-                return;
-            }
+            string customerName = customerNameTextBox.Text;
+            string gardenName = gardenNameTextBox.Text;
 
-            if (customer == null)
-            {
-                customer = new CustomerModel(customerNameTextBox.Text);
-            }
-
-            if (garden != null)
-            {
-                MessageBox.Show("A garden has already been created.");
-                return;
-            }
-
-            garden = new GardenModel(gardenNameTextBox.Text);
-            customer.AddGarden(garden);
-
-            // Save customer and garden to a JSON file
-            SaveDataToJSON();
-
-            MessageBox.Show("Garden created successfully!");
+            onboardingManager.CreateGarden(customerName, gardenName);
         }
-
 
         private void addPlantButton_Click(object sender, EventArgs e)
         {
-            if (garden == null)
-            {
-                MessageBox.Show("Please create a garden first.");
-                return;
-            }
-
-            if (string.IsNullOrEmpty(plantNameTextBox.Text) || string.IsNullOrEmpty(plantTypeTextBox.Text) || plantColorComboBox.SelectedItem == null)
-            {
-                MessageBox.Show("Please enter all the plant details.");
-                return;
-            }
-
+            string plantName = plantNameTextBox.Text;
+            Gardening.Color color = (Gardening.Color)plantColorComboBox.SelectedItem;
+            string plantType = plantTypeTextBox.Text;
             DateTime pruneStart = pruneStartPeriodTimePicker.Value;
             DateTime pruneEnd = pruneEndTimePicker.Value;
             DateTime blossomStart = blossomStartTimePicker.Value;
             DateTime blossomEnd = blossomEndTimerPeriod.Value;
 
-            if (pruneStart > pruneEnd || blossomStart > blossomEnd)
-            {
-                MessageBox.Show("Please select valid periods.");
-                return;
-            }
-
-            Gardening.Color color = (Gardening.Color)plantColorComboBox.SelectedItem;
-            PlantModel plant = new PlantModel(
-                plantNameTextBox.Text.ToString(),
-                color,
-                plantTypeTextBox.Text,
-                pruneStart,
-                pruneEnd,
-                blossomStart,
-                blossomEnd
-            );
-
-            garden.AddPlant(plant);
-            plantsListBox.Items.Add(plant);
-
-            // Save updated garden to a JSON file
-            SaveDataToJSON();
-
-            ClearPlantFields();
+            onboardingManager.AddPlant(plantName, color, plantType, pruneStart, pruneEnd, blossomStart, blossomEnd);
+            UpdatePlantsListBox();
         }
+        private void UpdatePlantsListBox()
+        {
+            plantsListBox.Items.Clear();
+            List<PlantModel> plants = onboardingManager.GetPlants();
 
-
+            foreach (PlantModel plant in plants)
+            {
+                plantsListBox.Items.Add(plant);
+            }
+        }
 
         private void getInfoButton_Click(object sender, EventArgs e)
         {
             if (plantsListBox.SelectedItem != null)
             {
                 PlantModel selectedPlant = (PlantModel)plantsListBox.SelectedItem;
-                MessageBox.Show($"Plant: {selectedPlant.Plant}\nColor: {selectedPlant.Color}\nType: {selectedPlant.Type}\nBlossom Period: {selectedPlant.StartBlossomPeriod.ToShortDateString()} - {selectedPlant.EndBlosomPeriod.ToShortDateString()}\nPrune Period: {selectedPlant.StartPrunePeriods.ToShortDateString()} - {selectedPlant.EndPrunePeriods.ToShortDateString()}");
+                onboardingManager.GetPlantInfo(selectedPlant);
             }
             else
             {
@@ -116,10 +70,7 @@ namespace GardeningV2
             if (plantsListBox.SelectedItem != null)
             {
                 PlantModel selectedPlant = (PlantModel)plantsListBox.SelectedItem;
-                garden.DeletePlant(selectedPlant);
-                plantsListBox.Items.Remove(selectedPlant);
-
-                SaveDataToJSON();
+                onboardingManager.RemovePlant(selectedPlant);
             }
             else
             {
@@ -127,41 +78,25 @@ namespace GardeningV2
             }
         }
 
-        private void SaveDataToJSON()
+        private void goToDashboard_Click(object sender, EventArgs e)
         {
-            JsonSerializerSettings settings = new JsonSerializerSettings
+            if (onboardingManager.HasGarden())
             {
-                Formatting = Formatting.Indented
-            };
+                this.Hide();
 
-            // Add StringEnumConverter to serialize the Color enum as strings
-            settings.Converters.Add(new StringEnumConverter());
+                Dashboard dashboardForm = new Dashboard();
 
-            string customerJson = JsonConvert.SerializeObject(customer, settings);
-            File.WriteAllText("customer.json", customerJson);
-
-            if (garden != null)
+                dashboardForm.Show();
+            }
+            else
             {
-                string gardenJson = JsonConvert.SerializeObject(garden, settings);
-                File.WriteAllText("garden.json", gardenJson);
+                MessageBox.Show("Please create a garden and add some plants first.");
             }
         }
 
-        private void ClearPlantFields()
-        {
-            plantNameTextBox.Text = string.Empty;
-            plantTypeTextBox.Text = string.Empty;
-            plantColorComboBox.SelectedItem = null;
-        }
-
-
-        private void goToDashboard_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-
-            Dashboard dashboardForm = new Dashboard();
-
-            dashboardForm.Show();
-        }
     }
+
 }
+
+
+
